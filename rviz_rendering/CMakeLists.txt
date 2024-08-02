@@ -39,6 +39,7 @@ find_package(ament_index_cpp REQUIRED)
 find_package(eigen3_cmake_module REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(resource_retriever REQUIRED)
+find_package(resource_retriever_msgs REQUIRED)
 
 # TODO(wjwwood): this block is to setup the windeployqt tool, could be removed later.
 if(Qt5_FOUND AND WIN32 AND TARGET Qt5::qmake AND NOT TARGET Qt5::windeployqt)
@@ -115,6 +116,7 @@ target_link_libraries(rviz_rendering PRIVATE
   ament_index_cpp::ament_index_cpp
   assimp::assimp
   resource_retriever::resource_retriever
+  ${resource_retriever_msgs_TARGETS}
 )
 
 target_include_directories(rviz_rendering

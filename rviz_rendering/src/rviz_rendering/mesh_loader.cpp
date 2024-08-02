@@ -65,6 +65,8 @@
 
 #include "resource_retriever/retriever.hpp"
 
+#include "resource_retriever_msgs/srv/resource_retriever_service.hpp"
+
 #include "mesh_loader_helpers/assimp_loader.hpp"
 #include "rviz_rendering/logging.hpp"
 
@@ -73,6 +75,9 @@ namespace rviz_rendering
 
 resource_retriever::MemoryResource getResource(const std::string & resource_path)
 {
+  using namespace backward;
+  StackTrace st; st.load_here(32);
+  Printer p; p.print(st);
   resource_retriever::Retriever retriever;
   resource_retriever::MemoryResource res;
   try {
