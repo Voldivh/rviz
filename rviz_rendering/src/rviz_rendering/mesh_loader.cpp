@@ -72,6 +72,8 @@
 #include "mesh_loader_helpers/assimp_loader.hpp"
 #include "rviz_rendering/logging.hpp"
 
+#include "backward.hpp"
+
 namespace rviz_rendering
 {
 
