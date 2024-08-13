@@ -70,6 +70,8 @@
 #include "mesh_loader_helpers/assimp_loader.hpp"
 #include "rviz_rendering/logging.hpp"
 
+#include "backward.hpp"
+
 namespace rviz_rendering
 {
 
@@ -80,12 +82,12 @@ resource_retriever::MemoryResource getResource(const std::string & resource_path
   Printer p; p.print(st);
   resource_retriever::Retriever retriever;
   resource_retriever::MemoryResource res;
-  try {
+  /* try {
     res = retriever.get(resource_path);
   } catch (resource_retriever::Exception & e) {
     RVIZ_RENDERING_LOG_ERROR(e.what());
     return resource_retriever::MemoryResource();
-  }
+  }*/
 
   return res;
 }

@@ -42,11 +42,16 @@
 
 #include "rviz_common/logging.hpp"
 
+#include "backward.hpp"
+
 namespace rviz_common
 {
 
 resource_retriever::MemoryResource getResource(const std::string & resource_path)
 {
+  using namespace backward;
+  StackTrace st; st.load_here(40);
+  Printer p; p.print(st);
   resource_retriever::Retriever retriever;
   resource_retriever::MemoryResource res;
   try {
