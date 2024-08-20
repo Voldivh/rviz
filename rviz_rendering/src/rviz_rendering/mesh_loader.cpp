@@ -67,12 +67,8 @@
 
 #include "resource_retriever/retriever.hpp"
 
-#include "resource_retriever_msgs/srv/resource_retriever_service.hpp"
-
 #include "mesh_loader_helpers/assimp_loader.hpp"
 #include "rviz_rendering/logging.hpp"
-
-#include "backward.hpp"
 
 namespace rviz_rendering
 {

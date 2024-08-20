@@ -43,8 +43,6 @@
 
 #include "rviz_common/logging.hpp"
 
-#include "backward.hpp"
-
 namespace rviz_common
 {
 
