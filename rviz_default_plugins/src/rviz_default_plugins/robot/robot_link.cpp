@@ -58,6 +58,7 @@
 #include <gz/math/Vector3.hh>
 
 #include "resource_retriever/retriever.hpp"
+#include "resource_retriever_msgs/srv/resource_retriever_service.hpp"
 
 #include "rviz_default_plugins/robot/robot_joint.hpp"
 #include "rviz_default_plugins/robot/robot.hpp"
@@ -91,6 +92,7 @@ using rviz_common::properties::Property;
 using rviz_common::properties::FloatProperty;
 using rviz_common::properties::QuaternionProperty;
 using rviz_common::properties::VectorProperty;
+using ResourceRetrieverSrv = resource_retriever_msgs::srv::ResourceRetrieverService;
 class RosRetriever: public resource_retriever::plugins::RetrieverPlugin
 
 {
@@ -115,6 +117,20 @@ public:
   resource_retriever::MemoryResourcePtr get(const std::string & url) override
   {
     printf("Trying to get %s\n", url.c_str());
+    auto node = ros_iface_.lock()->get_raw_node();
+    auto client = node->create_client<ResourceRetrieverSrv>("resource_retriever");
+    auto request = std::make_shared<ResourceRetrieverSrv::Request>();
+    request->path = url;
+
+    auto result_future = client->async_send_request(request);
+    result_future.wait();
+    auto result = result_future.get();
+
+    if (result->status_code == 1){
+      resource_retriever::MemoryResource resource(result->body);
+      auto res = std::make_shared<resource_retriever::MemoryResource>(resource);
+      return res;
+    }
     return nullptr;
   }
 
